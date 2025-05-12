@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
+RUN npx prisma generate  # Add this line to generate Prisma client
 RUN npm run build
 FROM node:20-slim
 WORKDIR /app
