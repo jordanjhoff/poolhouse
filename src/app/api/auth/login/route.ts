@@ -19,8 +19,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Invalid password' }, { status: 401 });
   }
 
-  const secret = process.env.JWT_SECRET;
-  const expirationTime = process.env.JWT_EXPIRATION_TIME || '1h'; 
+  const secret: jwt.Secret = process.env.JWT_SECRET!;
 
   if (!secret) {
     return NextResponse.json({ error: 'Server error: JWT_SECRET not found' }, { status: 500 });
@@ -28,8 +27,8 @@ export async function POST(req: Request) {
 
   const token = jwt.sign(
     { userId: user.id, name: user.name },
-    secret,             
-    { expiresIn: expirationTime }
+    secret,
+    { expiresIn: '30d' }
   );
 
   return NextResponse.json({ token });
