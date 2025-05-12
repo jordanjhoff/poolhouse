@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Head from 'next/head';
 
 export default function RegisterPage() {
   const [name, setName] = useState('');
@@ -34,6 +35,9 @@ export default function RegisterPage() {
 
   return (
     <main style={{ padding: 40, maxWidth: 400, margin: '0 auto' }}>
+      <Head>
+        <title>Poolhouse - Create Account</title>
+      </Head>
       <h1>Create Account</h1>
       <form onSubmit={handleRegister} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         <input

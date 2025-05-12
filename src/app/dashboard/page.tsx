@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Head from 'next/head';
 
 export default function DashboardPage() {
   const [user, setUser] = useState<any>(null);
@@ -143,6 +144,9 @@ export default function DashboardPage() {
 
   return (
     <main style={{ padding: 40 }}>
+      <Head>
+        <title>Poolhouse - Dashboard</title>
+      </Head>
       <h1>Dashboard</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {user && (
