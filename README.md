@@ -1,1 +1,1 @@
-This is a Next.js afternoon project to handle a local elo system. Written in ts and js, using node.js
+This is a Next.js afternoon project to handle a local ELO system at a pool house. It manages an ELO system and follows FIDE (chess) rankings for calculating user ELO with a variable K factor. Has leaderboards for statistic tracking.
