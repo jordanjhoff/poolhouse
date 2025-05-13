@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Head from 'next/head';
+export const dynamic = "force-dynamic";
 
 export default function DashboardPage() {
   const [user, setUser] = useState<any>(null);
@@ -32,7 +32,7 @@ export default function DashboardPage() {
           console.log("User API response JSON:", data);
           if (data.error) {
             setError(data.error);
-            router.push("/login");
+            router.push("/");
           } else {
             setUser(data.user);
             setMatches(data.matches);
@@ -41,6 +41,8 @@ export default function DashboardPage() {
         .catch((err) => {
           console.error("Error fetching user:", err);
           setError("Failed to load user data");
+          localStorage.removeItem("token");
+          router.push("/");
         });
     }
   }, [router]);
@@ -144,9 +146,6 @@ export default function DashboardPage() {
 
   return (
     <main style={{ padding: 40 }}>
-      <Head>
-        <title>Poolhouse - Dashboard</title>
-      </Head>
       <h1>Dashboard</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {user && (

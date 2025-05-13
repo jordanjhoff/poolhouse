@@ -1,70 +1,53 @@
-import prisma from "@/lib/prisma";
-export const dynamic = "force-dynamic";
+'use client';
 
-export default async function LeaderboardPage() {
-  const users = await prisma.user.findMany({
-    select: {
-      id: true,
-      name: true,
-      elo: true,
-    },
-  });
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-  const usersWithStats = await Promise.all(
-    users.map(async (user) => {
-      const winCount = await prisma.match.count({
-        where: {
-          winnerId: user.id,
-        },
-      });
+export default function LeaderboardPage() {
+  const [usersWithStats, setUsersWithStats] = useState<any[]>([]);
+  const router = useRouter();
 
-      const lossCount = await prisma.match.count({
-        where: {
-          AND: [
-            { player1Id: user.id },
-            { NOT: { winnerId: user.id } },
-          ],
-        },
-      }) + await prisma.match.count({
-        where: {
-          AND: [
-            { player2Id: user.id },
-            { NOT: { winnerId: user.id } },
-          ],
-        },
-      });
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch('/api/leaderboard');
+      const data = await res.json();
+      setUsersWithStats(data);
+    }
+    fetchData();
+  }, []);
 
-      return {
-        ...user,
-        winCount,
-        lossCount,
-      };
-    })
-  );
-
-  usersWithStats.sort((a, b) => b.elo - a.elo);
 
   return (
-    <main className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Leaderboard</h1>
-      <table className="min-w-full table-auto border-collapse">
+    <main style={{ padding: '40px' }}>
+      <h1>Leaderboard</h1>
+      
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <h2>Top Players</h2>
+        <button
+          onClick={() => router.push('/dashboard')}
+        >
+          Go to Dashboard
+        </button>
+      </div>
+
+      <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '1rem' }}>
         <thead>
-          <tr className="bg-gray-200 dark:bg-gray-700">
-            <th className="px-6 py-3 text-left">Ranking</th>
-            <th className="px-6 py-3 text-left">Name</th>
-            <th className="px-6 py-3 text-left">ELO</th>
-            <th className="px-6 py-3 text-left">Wins</th>
-            <th className="px-6 py-3 text-left">Losses</th>
+          <tr>
+            <th style={{ borderBottom: '1px solid #ccc', textAlign: 'left', padding: '10px' }}>Ranking</th>
+            <th style={{ borderBottom: '1px solid #ccc', textAlign: 'left', padding: '10px' }}>Name</th>
+            <th style={{ borderBottom: '1px solid #ccc', textAlign: 'left', padding: '10px' }}>ELO</th>
+            <th style={{ borderBottom: '1px solid #ccc', textAlign: 'left', padding: '10px' }}>Wins</th>
+            <th style={{ borderBottom: '1px solid #ccc', textAlign: 'left', padding: '10px' }}>Losses</th>
           </tr>
         </thead>
         <tbody>
           {usersWithStats.map((user, index) => (
-            <tr key={user.id} className="border-t border-gray-300 dark:border-gray-600">
-              <td className="px-6 py-4">{index + 1}</td>
-              <td className="px-6 py-4">{user.name}</td>
-              <td className="px-6 py-4">{user.elo}</td>
-              <td className="px-6 py-4">{user.winCount}</td>
-              <td className="px-6 py-4">{user.lossCount}</td>
+            <tr key={user.id}>
+              <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>{index + 1}</td>
+              <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>{user.name}</td>
+              <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>{user.elo}</td>
+              <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>{user.winCount}</td>
+              <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>{user.lossCount}</td>
             </tr>
           ))}
         </tbody>
