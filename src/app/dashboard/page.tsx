@@ -136,8 +136,11 @@ export default function DashboardPage() {
   }
 
   function logout() {
-    localStorage.removeItem("token");
-    router.push("/");
+    const confirmLogout = confirm("Are you sure you want to log out?");
+    if (confirmLogout) {
+      localStorage.removeItem("token");
+      router.push("/");
+    }
   }
 
   function goToLeaderboard() {
