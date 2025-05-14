@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
 import prisma from '@/lib/prisma';
-import jwt from 'jsonwebtoken';
+import { cookies } from 'next/headers';
+import { encrypt } from '@/lib/session';
 
 export async function POST(req: Request) {
   const { name, password } = await req.json();
@@ -11,28 +12,22 @@ export async function POST(req: Request) {
   });
 
   if (!user) {
-    console.log("H0!")
     return NextResponse.json({ error: 'User not found' }, { status: 404 });
-    
   }
 
   const passwordMatch = await bcrypt.compare(password, user.password);
   if (!passwordMatch) {
-    console.log("HI!")
     return NextResponse.json({ error: 'Invalid password' }, { status: 401 });
   }
 
-  const secret: jwt.Secret = process.env.JWT_SECRET!;
+  const session = await encrypt({ userId: user.id, name: user.name });
 
-  if (!secret) {
-    console.log("H0!")
-    return NextResponse.json({ error: 'Server error: JWT_SECRET not found' }, { status: 500 });
-  }
+  cookies().set('session', session, {
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+    path: '/',
+  });
 
-  const token = jwt.sign(
-    { userId: user.id, name: user.name },
-    secret
-  );
-
-  return NextResponse.json({ token });
+  return NextResponse.json({ message: 'Logged in' });
 }
