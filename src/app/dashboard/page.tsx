@@ -153,7 +153,7 @@ export default function DashboardPage() {
                   rating={user.rating}
                   wins={winCount}
                   losses={lossCount}
-                />
+                /><div className="pl-4">
                 <div className="flex flex-wrap gap-2">
                   <Button className="p-2 shadow-lg" onClick={() => handleMatch(prompt("Who did you beat?") || "", true)}>
                     Add Win
@@ -175,6 +175,7 @@ export default function DashboardPage() {
                   >
                     Undo Last Match
                   </Button>
+                </div>
                 </div>
                 <div className="p-2 shadow-lg">
                   <MatchList matches={transformedMatches} />
