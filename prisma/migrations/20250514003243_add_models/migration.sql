@@ -1,0 +1,38 @@
+-- CreateTable
+CREATE TABLE "UserV2" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "rating" DOUBLE PRECISION NOT NULL DEFAULT 0.0,
+    "rd" DOUBLE PRECISION NOT NULL DEFAULT 2.014,
+    "volatility" DOUBLE PRECISION NOT NULL DEFAULT 0.06,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "UserV2_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "MatchV2" (
+    "id" TEXT NOT NULL,
+    "player1Id" TEXT NOT NULL,
+    "player2Id" TEXT NOT NULL,
+    "winnerId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "player1eloChange" DOUBLE PRECISION NOT NULL,
+    "player2eloChange" DOUBLE PRECISION NOT NULL,
+
+    CONSTRAINT "MatchV2_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "UserV2_name_key" ON "UserV2"("name");
+
+-- AddForeignKey
+ALTER TABLE "MatchV2" ADD CONSTRAINT "MatchV2_player1Id_fkey" FOREIGN KEY ("player1Id") REFERENCES "UserV2"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "MatchV2" ADD CONSTRAINT "MatchV2_player2Id_fkey" FOREIGN KEY ("player2Id") REFERENCES "UserV2"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "MatchV2" ADD CONSTRAINT "MatchV2_winnerId_fkey" FOREIGN KEY ("winnerId") REFERENCES "UserV2"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

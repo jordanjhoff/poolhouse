@@ -139,6 +139,32 @@ exports.Prisma.MatchScalarFieldEnum = {
   player2eloChange: 'player2eloChange'
 };
 
+exports.Prisma.UserV2ScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  password: 'password',
+  rating: 'rating',
+  rd: 'rd',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MatchV2ScalarFieldEnum = {
+  id: 'id',
+  player1Id: 'player1Id',
+  player2Id: 'player2Id',
+  winnerId: 'winnerId',
+  createdAt: 'createdAt',
+  player1RatingBefore: 'player1RatingBefore',
+  player2RatingBefore: 'player2RatingBefore',
+  player1RatingAfter: 'player1RatingAfter',
+  player2RatingAfter: 'player2RatingAfter',
+  player1RdBefore: 'player1RdBefore',
+  player2RdBefore: 'player2RdBefore',
+  player1RdAfter: 'player1RdAfter',
+  player2RdAfter: 'player2RdAfter'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -152,7 +178,9 @@ exports.Prisma.QueryMode = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Match: 'Match'
+  Match: 'Match',
+  UserV2: 'UserV2',
+  MatchV2: 'MatchV2'
 };
 
 /**

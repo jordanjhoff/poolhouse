@@ -40,3 +40,47 @@ model Match {
   player2eloChange Int  
   winner           User     @relation("winner", fields: [winnerId], references: [id])
 }
+
+model UserV2 {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  password  String
+
+  // Glicko-1 rating fields
+  rating    Float    @default(1500.0)  // Initial Glicko rating
+  rd        Float    @default(350.0)   // Rating deviation (max at start)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  matches1  MatchV2[] @relation("player1")
+  matches2  MatchV2[] @relation("player2")
+  wins      MatchV2[] @relation("winner")
+}
+
+model MatchV2 {
+  id         String   @id @default(cuid())
+
+  player1Id  String
+  player2Id  String
+  winnerId   String
+
+  player1    UserV2   @relation("player1", fields: [player1Id], references: [id])
+  player2    UserV2   @relation("player2", fields: [player2Id], references: [id])
+  winner     UserV2   @relation("winner", fields: [winnerId], references: [id])
+
+  createdAt  DateTime @default(now())
+
+  // Glicko-1 rating snapshots
+  player1RatingBefore Float
+  player2RatingBefore Float
+
+  player1RatingAfter  Float
+  player2RatingAfter  Float
+
+  player1RdBefore     Float
+  player2RdBefore     Float
+
+  player1RdAfter      Float
+  player2RdAfter      Float
+}
