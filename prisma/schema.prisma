@@ -46,8 +46,7 @@ model UserV2 {
   name      String   @unique
   password  String
 
-  // Glicko-1 rating fields
-  rating    Float    @default(1500.0)
+  rating    Int    @default(1500)
   rd        Float    @default(350.0)   
   volatility Float    @default(0.06)  
 
@@ -72,16 +71,17 @@ model MatchV2 {
 
   createdAt  DateTime @default(now())
 
-  // Glicko-1 rating snapshots
-  player1RatingBefore Float
-  player2RatingBefore Float
+  player1RatingBefore Int
+  player2RatingBefore Int
 
-  player1RatingAfter  Float
-  player2RatingAfter  Float
+  player1RatingAfter  Int
+  player2RatingAfter  Int
 
   player1RdBefore     Float
   player2RdBefore     Float
 
   player1RdAfter      Float
   player2RdAfter      Float
+
+  undoable    Boolean @default(true)
 }

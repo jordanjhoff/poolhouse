@@ -163,7 +163,8 @@ exports.Prisma.MatchV2ScalarFieldEnum = {
   player1RdBefore: 'player1RdBefore',
   player2RdBefore: 'player2RdBefore',
   player1RdAfter: 'player1RdAfter',
-  player2RdAfter: 'player2RdAfter'
+  player2RdAfter: 'player2RdAfter',
+  undoable: 'undoable'
 };
 
 exports.Prisma.SortOrder = {

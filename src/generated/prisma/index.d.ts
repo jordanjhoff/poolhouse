@@ -4278,7 +4278,7 @@ export namespace Prisma {
     readonly id: FieldRef<"UserV2", 'String'>
     readonly name: FieldRef<"UserV2", 'String'>
     readonly password: FieldRef<"UserV2", 'String'>
-    readonly rating: FieldRef<"UserV2", 'Float'>
+    readonly rating: FieldRef<"UserV2", 'Int'>
     readonly rd: FieldRef<"UserV2", 'Float'>
     readonly volatility: FieldRef<"UserV2", 'Float'>
     readonly createdAt: FieldRef<"UserV2", 'DateTime'>
@@ -4809,6 +4809,7 @@ export namespace Prisma {
     player2RdBefore: number | null
     player1RdAfter: number | null
     player2RdAfter: number | null
+    undoable: boolean | null
   }
 
   export type MatchV2MaxAggregateOutputType = {
@@ -4825,6 +4826,7 @@ export namespace Prisma {
     player2RdBefore: number | null
     player1RdAfter: number | null
     player2RdAfter: number | null
+    undoable: boolean | null
   }
 
   export type MatchV2CountAggregateOutputType = {
@@ -4841,6 +4843,7 @@ export namespace Prisma {
     player2RdBefore: number
     player1RdAfter: number
     player2RdAfter: number
+    undoable: number
     _all: number
   }
 
@@ -4881,6 +4884,7 @@ export namespace Prisma {
     player2RdBefore?: true
     player1RdAfter?: true
     player2RdAfter?: true
+    undoable?: true
   }
 
   export type MatchV2MaxAggregateInputType = {
@@ -4897,6 +4901,7 @@ export namespace Prisma {
     player2RdBefore?: true
     player1RdAfter?: true
     player2RdAfter?: true
+    undoable?: true
   }
 
   export type MatchV2CountAggregateInputType = {
@@ -4913,6 +4918,7 @@ export namespace Prisma {
     player2RdBefore?: true
     player1RdAfter?: true
     player2RdAfter?: true
+    undoable?: true
     _all?: true
   }
 
@@ -5016,6 +5022,7 @@ export namespace Prisma {
     player2RdBefore: number
     player1RdAfter: number
     player2RdAfter: number
+    undoable: boolean
     _count: MatchV2CountAggregateOutputType | null
     _avg: MatchV2AvgAggregateOutputType | null
     _sum: MatchV2SumAggregateOutputType | null
@@ -5051,6 +5058,7 @@ export namespace Prisma {
     player2RdBefore?: boolean
     player1RdAfter?: boolean
     player2RdAfter?: boolean
+    undoable?: boolean
     player1?: boolean | UserV2DefaultArgs<ExtArgs>
     player2?: boolean | UserV2DefaultArgs<ExtArgs>
     winner?: boolean | UserV2DefaultArgs<ExtArgs>
@@ -5070,6 +5078,7 @@ export namespace Prisma {
     player2RdBefore?: boolean
     player1RdAfter?: boolean
     player2RdAfter?: boolean
+    undoable?: boolean
     player1?: boolean | UserV2DefaultArgs<ExtArgs>
     player2?: boolean | UserV2DefaultArgs<ExtArgs>
     winner?: boolean | UserV2DefaultArgs<ExtArgs>
@@ -5089,6 +5098,7 @@ export namespace Prisma {
     player2RdBefore?: boolean
     player1RdAfter?: boolean
     player2RdAfter?: boolean
+    undoable?: boolean
     player1?: boolean | UserV2DefaultArgs<ExtArgs>
     player2?: boolean | UserV2DefaultArgs<ExtArgs>
     winner?: boolean | UserV2DefaultArgs<ExtArgs>
@@ -5108,9 +5118,10 @@ export namespace Prisma {
     player2RdBefore?: boolean
     player1RdAfter?: boolean
     player2RdAfter?: boolean
+    undoable?: boolean
   }
 
-  export type MatchV2Omit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "player1Id" | "player2Id" | "winnerId" | "createdAt" | "player1RatingBefore" | "player2RatingBefore" | "player1RatingAfter" | "player2RatingAfter" | "player1RdBefore" | "player2RdBefore" | "player1RdAfter" | "player2RdAfter", ExtArgs["result"]["matchV2"]>
+  export type MatchV2Omit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "player1Id" | "player2Id" | "winnerId" | "createdAt" | "player1RatingBefore" | "player2RatingBefore" | "player1RatingAfter" | "player2RatingAfter" | "player1RdBefore" | "player2RdBefore" | "player1RdAfter" | "player2RdAfter" | "undoable", ExtArgs["result"]["matchV2"]>
   export type MatchV2Include<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     player1?: boolean | UserV2DefaultArgs<ExtArgs>
     player2?: boolean | UserV2DefaultArgs<ExtArgs>
@@ -5148,6 +5159,7 @@ export namespace Prisma {
       player2RdBefore: number
       player1RdAfter: number
       player2RdAfter: number
+      undoable: boolean
     }, ExtArgs["result"]["matchV2"]>
     composites: {}
   }
@@ -5579,14 +5591,15 @@ export namespace Prisma {
     readonly player2Id: FieldRef<"MatchV2", 'String'>
     readonly winnerId: FieldRef<"MatchV2", 'String'>
     readonly createdAt: FieldRef<"MatchV2", 'DateTime'>
-    readonly player1RatingBefore: FieldRef<"MatchV2", 'Float'>
-    readonly player2RatingBefore: FieldRef<"MatchV2", 'Float'>
-    readonly player1RatingAfter: FieldRef<"MatchV2", 'Float'>
-    readonly player2RatingAfter: FieldRef<"MatchV2", 'Float'>
+    readonly player1RatingBefore: FieldRef<"MatchV2", 'Int'>
+    readonly player2RatingBefore: FieldRef<"MatchV2", 'Int'>
+    readonly player1RatingAfter: FieldRef<"MatchV2", 'Int'>
+    readonly player2RatingAfter: FieldRef<"MatchV2", 'Int'>
     readonly player1RdBefore: FieldRef<"MatchV2", 'Float'>
     readonly player2RdBefore: FieldRef<"MatchV2", 'Float'>
     readonly player1RdAfter: FieldRef<"MatchV2", 'Float'>
     readonly player2RdAfter: FieldRef<"MatchV2", 'Float'>
+    readonly undoable: FieldRef<"MatchV2", 'Boolean'>
   }
     
 
@@ -6067,7 +6080,8 @@ export namespace Prisma {
     player1RdBefore: 'player1RdBefore',
     player2RdBefore: 'player2RdBefore',
     player1RdAfter: 'player1RdAfter',
-    player2RdAfter: 'player2RdAfter'
+    player2RdAfter: 'player2RdAfter',
+    undoable: 'undoable'
   };
 
   export type MatchV2ScalarFieldEnum = (typeof MatchV2ScalarFieldEnum)[keyof typeof MatchV2ScalarFieldEnum]
@@ -6147,6 +6161,13 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
   /**
    * Deep Input Types
@@ -6301,7 +6322,7 @@ export namespace Prisma {
     id?: StringFilter<"UserV2"> | string
     name?: StringFilter<"UserV2"> | string
     password?: StringFilter<"UserV2"> | string
-    rating?: FloatFilter<"UserV2"> | number
+    rating?: IntFilter<"UserV2"> | number
     rd?: FloatFilter<"UserV2"> | number
     volatility?: FloatFilter<"UserV2"> | number
     createdAt?: DateTimeFilter<"UserV2"> | Date | string
@@ -6332,7 +6353,7 @@ export namespace Prisma {
     OR?: UserV2WhereInput[]
     NOT?: UserV2WhereInput | UserV2WhereInput[]
     password?: StringFilter<"UserV2"> | string
-    rating?: FloatFilter<"UserV2"> | number
+    rating?: IntFilter<"UserV2"> | number
     rd?: FloatFilter<"UserV2"> | number
     volatility?: FloatFilter<"UserV2"> | number
     createdAt?: DateTimeFilter<"UserV2"> | Date | string
@@ -6365,7 +6386,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"UserV2"> | string
     name?: StringWithAggregatesFilter<"UserV2"> | string
     password?: StringWithAggregatesFilter<"UserV2"> | string
-    rating?: FloatWithAggregatesFilter<"UserV2"> | number
+    rating?: IntWithAggregatesFilter<"UserV2"> | number
     rd?: FloatWithAggregatesFilter<"UserV2"> | number
     volatility?: FloatWithAggregatesFilter<"UserV2"> | number
     createdAt?: DateTimeWithAggregatesFilter<"UserV2"> | Date | string
@@ -6381,14 +6402,15 @@ export namespace Prisma {
     player2Id?: StringFilter<"MatchV2"> | string
     winnerId?: StringFilter<"MatchV2"> | string
     createdAt?: DateTimeFilter<"MatchV2"> | Date | string
-    player1RatingBefore?: FloatFilter<"MatchV2"> | number
-    player2RatingBefore?: FloatFilter<"MatchV2"> | number
-    player1RatingAfter?: FloatFilter<"MatchV2"> | number
-    player2RatingAfter?: FloatFilter<"MatchV2"> | number
+    player1RatingBefore?: IntFilter<"MatchV2"> | number
+    player2RatingBefore?: IntFilter<"MatchV2"> | number
+    player1RatingAfter?: IntFilter<"MatchV2"> | number
+    player2RatingAfter?: IntFilter<"MatchV2"> | number
     player1RdBefore?: FloatFilter<"MatchV2"> | number
     player2RdBefore?: FloatFilter<"MatchV2"> | number
     player1RdAfter?: FloatFilter<"MatchV2"> | number
     player2RdAfter?: FloatFilter<"MatchV2"> | number
+    undoable?: BoolFilter<"MatchV2"> | boolean
     player1?: XOR<UserV2ScalarRelationFilter, UserV2WhereInput>
     player2?: XOR<UserV2ScalarRelationFilter, UserV2WhereInput>
     winner?: XOR<UserV2ScalarRelationFilter, UserV2WhereInput>
@@ -6408,6 +6430,7 @@ export namespace Prisma {
     player2RdBefore?: SortOrder
     player1RdAfter?: SortOrder
     player2RdAfter?: SortOrder
+    undoable?: SortOrder
     player1?: UserV2OrderByWithRelationInput
     player2?: UserV2OrderByWithRelationInput
     winner?: UserV2OrderByWithRelationInput
@@ -6422,14 +6445,15 @@ export namespace Prisma {
     player2Id?: StringFilter<"MatchV2"> | string
     winnerId?: StringFilter<"MatchV2"> | string
     createdAt?: DateTimeFilter<"MatchV2"> | Date | string
-    player1RatingBefore?: FloatFilter<"MatchV2"> | number
-    player2RatingBefore?: FloatFilter<"MatchV2"> | number
-    player1RatingAfter?: FloatFilter<"MatchV2"> | number
-    player2RatingAfter?: FloatFilter<"MatchV2"> | number
+    player1RatingBefore?: IntFilter<"MatchV2"> | number
+    player2RatingBefore?: IntFilter<"MatchV2"> | number
+    player1RatingAfter?: IntFilter<"MatchV2"> | number
+    player2RatingAfter?: IntFilter<"MatchV2"> | number
     player1RdBefore?: FloatFilter<"MatchV2"> | number
     player2RdBefore?: FloatFilter<"MatchV2"> | number
     player1RdAfter?: FloatFilter<"MatchV2"> | number
     player2RdAfter?: FloatFilter<"MatchV2"> | number
+    undoable?: BoolFilter<"MatchV2"> | boolean
     player1?: XOR<UserV2ScalarRelationFilter, UserV2WhereInput>
     player2?: XOR<UserV2ScalarRelationFilter, UserV2WhereInput>
     winner?: XOR<UserV2ScalarRelationFilter, UserV2WhereInput>
@@ -6449,6 +6473,7 @@ export namespace Prisma {
     player2RdBefore?: SortOrder
     player1RdAfter?: SortOrder
     player2RdAfter?: SortOrder
+    undoable?: SortOrder
     _count?: MatchV2CountOrderByAggregateInput
     _avg?: MatchV2AvgOrderByAggregateInput
     _max?: MatchV2MaxOrderByAggregateInput
@@ -6465,14 +6490,15 @@ export namespace Prisma {
     player2Id?: StringWithAggregatesFilter<"MatchV2"> | string
     winnerId?: StringWithAggregatesFilter<"MatchV2"> | string
     createdAt?: DateTimeWithAggregatesFilter<"MatchV2"> | Date | string
-    player1RatingBefore?: FloatWithAggregatesFilter<"MatchV2"> | number
-    player2RatingBefore?: FloatWithAggregatesFilter<"MatchV2"> | number
-    player1RatingAfter?: FloatWithAggregatesFilter<"MatchV2"> | number
-    player2RatingAfter?: FloatWithAggregatesFilter<"MatchV2"> | number
+    player1RatingBefore?: IntWithAggregatesFilter<"MatchV2"> | number
+    player2RatingBefore?: IntWithAggregatesFilter<"MatchV2"> | number
+    player1RatingAfter?: IntWithAggregatesFilter<"MatchV2"> | number
+    player2RatingAfter?: IntWithAggregatesFilter<"MatchV2"> | number
     player1RdBefore?: FloatWithAggregatesFilter<"MatchV2"> | number
     player2RdBefore?: FloatWithAggregatesFilter<"MatchV2"> | number
     player1RdAfter?: FloatWithAggregatesFilter<"MatchV2"> | number
     player2RdAfter?: FloatWithAggregatesFilter<"MatchV2"> | number
+    undoable?: BoolWithAggregatesFilter<"MatchV2"> | boolean
   }
 
   export type UserCreateInput = {
@@ -6649,7 +6675,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    rating?: FloatFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
     volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6663,7 +6689,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    rating?: FloatFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
     volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6688,7 +6714,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    rating?: FloatFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
     volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6699,7 +6725,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    rating?: FloatFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
     volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6717,6 +6743,7 @@ export namespace Prisma {
     player2RdBefore: number
     player1RdAfter: number
     player2RdAfter: number
+    undoable?: boolean
     player1: UserV2CreateNestedOneWithoutMatches1Input
     player2: UserV2CreateNestedOneWithoutMatches2Input
     winner: UserV2CreateNestedOneWithoutWinsInput
@@ -6736,19 +6763,21 @@ export namespace Prisma {
     player2RdBefore: number
     player1RdAfter: number
     player2RdAfter: number
+    undoable?: boolean
   }
 
   export type MatchV2UpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    player1RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player2RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player1RatingAfter?: FloatFieldUpdateOperationsInput | number
-    player2RatingAfter?: FloatFieldUpdateOperationsInput | number
+    player1RatingBefore?: IntFieldUpdateOperationsInput | number
+    player2RatingBefore?: IntFieldUpdateOperationsInput | number
+    player1RatingAfter?: IntFieldUpdateOperationsInput | number
+    player2RatingAfter?: IntFieldUpdateOperationsInput | number
     player1RdBefore?: FloatFieldUpdateOperationsInput | number
     player2RdBefore?: FloatFieldUpdateOperationsInput | number
     player1RdAfter?: FloatFieldUpdateOperationsInput | number
     player2RdAfter?: FloatFieldUpdateOperationsInput | number
+    undoable?: BoolFieldUpdateOperationsInput | boolean
     player1?: UserV2UpdateOneRequiredWithoutMatches1NestedInput
     player2?: UserV2UpdateOneRequiredWithoutMatches2NestedInput
     winner?: UserV2UpdateOneRequiredWithoutWinsNestedInput
@@ -6760,14 +6789,15 @@ export namespace Prisma {
     player2Id?: StringFieldUpdateOperationsInput | string
     winnerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    player1RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player2RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player1RatingAfter?: FloatFieldUpdateOperationsInput | number
-    player2RatingAfter?: FloatFieldUpdateOperationsInput | number
+    player1RatingBefore?: IntFieldUpdateOperationsInput | number
+    player2RatingBefore?: IntFieldUpdateOperationsInput | number
+    player1RatingAfter?: IntFieldUpdateOperationsInput | number
+    player2RatingAfter?: IntFieldUpdateOperationsInput | number
     player1RdBefore?: FloatFieldUpdateOperationsInput | number
     player2RdBefore?: FloatFieldUpdateOperationsInput | number
     player1RdAfter?: FloatFieldUpdateOperationsInput | number
     player2RdAfter?: FloatFieldUpdateOperationsInput | number
+    undoable?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MatchV2CreateManyInput = {
@@ -6784,19 +6814,21 @@ export namespace Prisma {
     player2RdBefore: number
     player1RdAfter: number
     player2RdAfter: number
+    undoable?: boolean
   }
 
   export type MatchV2UpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    player1RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player2RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player1RatingAfter?: FloatFieldUpdateOperationsInput | number
-    player2RatingAfter?: FloatFieldUpdateOperationsInput | number
+    player1RatingBefore?: IntFieldUpdateOperationsInput | number
+    player2RatingBefore?: IntFieldUpdateOperationsInput | number
+    player1RatingAfter?: IntFieldUpdateOperationsInput | number
+    player2RatingAfter?: IntFieldUpdateOperationsInput | number
     player1RdBefore?: FloatFieldUpdateOperationsInput | number
     player2RdBefore?: FloatFieldUpdateOperationsInput | number
     player1RdAfter?: FloatFieldUpdateOperationsInput | number
     player2RdAfter?: FloatFieldUpdateOperationsInput | number
+    undoable?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MatchV2UncheckedUpdateManyInput = {
@@ -6805,14 +6837,15 @@ export namespace Prisma {
     player2Id?: StringFieldUpdateOperationsInput | string
     winnerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    player1RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player2RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player1RatingAfter?: FloatFieldUpdateOperationsInput | number
-    player2RatingAfter?: FloatFieldUpdateOperationsInput | number
+    player1RatingBefore?: IntFieldUpdateOperationsInput | number
+    player2RatingBefore?: IntFieldUpdateOperationsInput | number
+    player1RatingAfter?: IntFieldUpdateOperationsInput | number
+    player2RatingAfter?: IntFieldUpdateOperationsInput | number
     player1RdBefore?: FloatFieldUpdateOperationsInput | number
     player2RdBefore?: FloatFieldUpdateOperationsInput | number
     player1RdAfter?: FloatFieldUpdateOperationsInput | number
     player2RdAfter?: FloatFieldUpdateOperationsInput | number
+    undoable?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -7074,6 +7107,11 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type UserV2ScalarRelationFilter = {
     is?: UserV2WhereInput
     isNot?: UserV2WhereInput
@@ -7093,6 +7131,7 @@ export namespace Prisma {
     player2RdBefore?: SortOrder
     player1RdAfter?: SortOrder
     player2RdAfter?: SortOrder
+    undoable?: SortOrder
   }
 
   export type MatchV2AvgOrderByAggregateInput = {
@@ -7120,6 +7159,7 @@ export namespace Prisma {
     player2RdBefore?: SortOrder
     player1RdAfter?: SortOrder
     player2RdAfter?: SortOrder
+    undoable?: SortOrder
   }
 
   export type MatchV2MinOrderByAggregateInput = {
@@ -7136,6 +7176,7 @@ export namespace Prisma {
     player2RdBefore?: SortOrder
     player1RdAfter?: SortOrder
     player2RdAfter?: SortOrder
+    undoable?: SortOrder
   }
 
   export type MatchV2SumOrderByAggregateInput = {
@@ -7147,6 +7188,14 @@ export namespace Prisma {
     player2RdBefore?: SortOrder
     player1RdAfter?: SortOrder
     player2RdAfter?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type MatchCreateNestedManyWithoutPlayer1Input = {
@@ -7485,6 +7534,10 @@ export namespace Prisma {
     connect?: UserV2WhereUniqueInput
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type UserV2UpdateOneRequiredWithoutMatches1NestedInput = {
     create?: XOR<UserV2CreateWithoutMatches1Input, UserV2UncheckedCreateWithoutMatches1Input>
     connectOrCreate?: UserV2CreateOrConnectWithoutMatches1Input
@@ -7617,6 +7670,19 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type MatchCreateWithoutPlayer1Input = {
@@ -7955,6 +8021,7 @@ export namespace Prisma {
     player2RdBefore: number
     player1RdAfter: number
     player2RdAfter: number
+    undoable?: boolean
     player2: UserV2CreateNestedOneWithoutMatches2Input
     winner: UserV2CreateNestedOneWithoutWinsInput
   }
@@ -7972,6 +8039,7 @@ export namespace Prisma {
     player2RdBefore: number
     player1RdAfter: number
     player2RdAfter: number
+    undoable?: boolean
   }
 
   export type MatchV2CreateOrConnectWithoutPlayer1Input = {
@@ -7995,6 +8063,7 @@ export namespace Prisma {
     player2RdBefore: number
     player1RdAfter: number
     player2RdAfter: number
+    undoable?: boolean
     player1: UserV2CreateNestedOneWithoutMatches1Input
     winner: UserV2CreateNestedOneWithoutWinsInput
   }
@@ -8012,6 +8081,7 @@ export namespace Prisma {
     player2RdBefore: number
     player1RdAfter: number
     player2RdAfter: number
+    undoable?: boolean
   }
 
   export type MatchV2CreateOrConnectWithoutPlayer2Input = {
@@ -8035,6 +8105,7 @@ export namespace Prisma {
     player2RdBefore: number
     player1RdAfter: number
     player2RdAfter: number
+    undoable?: boolean
     player1: UserV2CreateNestedOneWithoutMatches1Input
     player2: UserV2CreateNestedOneWithoutMatches2Input
   }
@@ -8052,6 +8123,7 @@ export namespace Prisma {
     player2RdBefore: number
     player1RdAfter: number
     player2RdAfter: number
+    undoable?: boolean
   }
 
   export type MatchV2CreateOrConnectWithoutWinnerInput = {
@@ -8089,14 +8161,15 @@ export namespace Prisma {
     player2Id?: StringFilter<"MatchV2"> | string
     winnerId?: StringFilter<"MatchV2"> | string
     createdAt?: DateTimeFilter<"MatchV2"> | Date | string
-    player1RatingBefore?: FloatFilter<"MatchV2"> | number
-    player2RatingBefore?: FloatFilter<"MatchV2"> | number
-    player1RatingAfter?: FloatFilter<"MatchV2"> | number
-    player2RatingAfter?: FloatFilter<"MatchV2"> | number
+    player1RatingBefore?: IntFilter<"MatchV2"> | number
+    player2RatingBefore?: IntFilter<"MatchV2"> | number
+    player1RatingAfter?: IntFilter<"MatchV2"> | number
+    player2RatingAfter?: IntFilter<"MatchV2"> | number
     player1RdBefore?: FloatFilter<"MatchV2"> | number
     player2RdBefore?: FloatFilter<"MatchV2"> | number
     player1RdAfter?: FloatFilter<"MatchV2"> | number
     player2RdAfter?: FloatFilter<"MatchV2"> | number
+    undoable?: BoolFilter<"MatchV2"> | boolean
   }
 
   export type MatchV2UpsertWithWhereUniqueWithoutPlayer2Input = {
@@ -8239,7 +8312,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    rating?: FloatFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
     volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8252,7 +8325,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    rating?: FloatFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
     volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8276,7 +8349,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    rating?: FloatFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
     volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8289,7 +8362,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    rating?: FloatFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
     volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8313,7 +8386,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    rating?: FloatFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
     volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8326,7 +8399,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    rating?: FloatFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
     volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8456,6 +8529,7 @@ export namespace Prisma {
     player2RdBefore: number
     player1RdAfter: number
     player2RdAfter: number
+    undoable?: boolean
   }
 
   export type MatchV2CreateManyPlayer2Input = {
@@ -8471,6 +8545,7 @@ export namespace Prisma {
     player2RdBefore: number
     player1RdAfter: number
     player2RdAfter: number
+    undoable?: boolean
   }
 
   export type MatchV2CreateManyWinnerInput = {
@@ -8486,19 +8561,21 @@ export namespace Prisma {
     player2RdBefore: number
     player1RdAfter: number
     player2RdAfter: number
+    undoable?: boolean
   }
 
   export type MatchV2UpdateWithoutPlayer1Input = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    player1RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player2RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player1RatingAfter?: FloatFieldUpdateOperationsInput | number
-    player2RatingAfter?: FloatFieldUpdateOperationsInput | number
+    player1RatingBefore?: IntFieldUpdateOperationsInput | number
+    player2RatingBefore?: IntFieldUpdateOperationsInput | number
+    player1RatingAfter?: IntFieldUpdateOperationsInput | number
+    player2RatingAfter?: IntFieldUpdateOperationsInput | number
     player1RdBefore?: FloatFieldUpdateOperationsInput | number
     player2RdBefore?: FloatFieldUpdateOperationsInput | number
     player1RdAfter?: FloatFieldUpdateOperationsInput | number
     player2RdAfter?: FloatFieldUpdateOperationsInput | number
+    undoable?: BoolFieldUpdateOperationsInput | boolean
     player2?: UserV2UpdateOneRequiredWithoutMatches2NestedInput
     winner?: UserV2UpdateOneRequiredWithoutWinsNestedInput
   }
@@ -8508,14 +8585,15 @@ export namespace Prisma {
     player2Id?: StringFieldUpdateOperationsInput | string
     winnerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    player1RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player2RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player1RatingAfter?: FloatFieldUpdateOperationsInput | number
-    player2RatingAfter?: FloatFieldUpdateOperationsInput | number
+    player1RatingBefore?: IntFieldUpdateOperationsInput | number
+    player2RatingBefore?: IntFieldUpdateOperationsInput | number
+    player1RatingAfter?: IntFieldUpdateOperationsInput | number
+    player2RatingAfter?: IntFieldUpdateOperationsInput | number
     player1RdBefore?: FloatFieldUpdateOperationsInput | number
     player2RdBefore?: FloatFieldUpdateOperationsInput | number
     player1RdAfter?: FloatFieldUpdateOperationsInput | number
     player2RdAfter?: FloatFieldUpdateOperationsInput | number
+    undoable?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MatchV2UncheckedUpdateManyWithoutPlayer1Input = {
@@ -8523,27 +8601,29 @@ export namespace Prisma {
     player2Id?: StringFieldUpdateOperationsInput | string
     winnerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    player1RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player2RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player1RatingAfter?: FloatFieldUpdateOperationsInput | number
-    player2RatingAfter?: FloatFieldUpdateOperationsInput | number
+    player1RatingBefore?: IntFieldUpdateOperationsInput | number
+    player2RatingBefore?: IntFieldUpdateOperationsInput | number
+    player1RatingAfter?: IntFieldUpdateOperationsInput | number
+    player2RatingAfter?: IntFieldUpdateOperationsInput | number
     player1RdBefore?: FloatFieldUpdateOperationsInput | number
     player2RdBefore?: FloatFieldUpdateOperationsInput | number
     player1RdAfter?: FloatFieldUpdateOperationsInput | number
     player2RdAfter?: FloatFieldUpdateOperationsInput | number
+    undoable?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MatchV2UpdateWithoutPlayer2Input = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    player1RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player2RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player1RatingAfter?: FloatFieldUpdateOperationsInput | number
-    player2RatingAfter?: FloatFieldUpdateOperationsInput | number
+    player1RatingBefore?: IntFieldUpdateOperationsInput | number
+    player2RatingBefore?: IntFieldUpdateOperationsInput | number
+    player1RatingAfter?: IntFieldUpdateOperationsInput | number
+    player2RatingAfter?: IntFieldUpdateOperationsInput | number
     player1RdBefore?: FloatFieldUpdateOperationsInput | number
     player2RdBefore?: FloatFieldUpdateOperationsInput | number
     player1RdAfter?: FloatFieldUpdateOperationsInput | number
     player2RdAfter?: FloatFieldUpdateOperationsInput | number
+    undoable?: BoolFieldUpdateOperationsInput | boolean
     player1?: UserV2UpdateOneRequiredWithoutMatches1NestedInput
     winner?: UserV2UpdateOneRequiredWithoutWinsNestedInput
   }
@@ -8553,14 +8633,15 @@ export namespace Prisma {
     player1Id?: StringFieldUpdateOperationsInput | string
     winnerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    player1RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player2RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player1RatingAfter?: FloatFieldUpdateOperationsInput | number
-    player2RatingAfter?: FloatFieldUpdateOperationsInput | number
+    player1RatingBefore?: IntFieldUpdateOperationsInput | number
+    player2RatingBefore?: IntFieldUpdateOperationsInput | number
+    player1RatingAfter?: IntFieldUpdateOperationsInput | number
+    player2RatingAfter?: IntFieldUpdateOperationsInput | number
     player1RdBefore?: FloatFieldUpdateOperationsInput | number
     player2RdBefore?: FloatFieldUpdateOperationsInput | number
     player1RdAfter?: FloatFieldUpdateOperationsInput | number
     player2RdAfter?: FloatFieldUpdateOperationsInput | number
+    undoable?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MatchV2UncheckedUpdateManyWithoutPlayer2Input = {
@@ -8568,27 +8649,29 @@ export namespace Prisma {
     player1Id?: StringFieldUpdateOperationsInput | string
     winnerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    player1RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player2RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player1RatingAfter?: FloatFieldUpdateOperationsInput | number
-    player2RatingAfter?: FloatFieldUpdateOperationsInput | number
+    player1RatingBefore?: IntFieldUpdateOperationsInput | number
+    player2RatingBefore?: IntFieldUpdateOperationsInput | number
+    player1RatingAfter?: IntFieldUpdateOperationsInput | number
+    player2RatingAfter?: IntFieldUpdateOperationsInput | number
     player1RdBefore?: FloatFieldUpdateOperationsInput | number
     player2RdBefore?: FloatFieldUpdateOperationsInput | number
     player1RdAfter?: FloatFieldUpdateOperationsInput | number
     player2RdAfter?: FloatFieldUpdateOperationsInput | number
+    undoable?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MatchV2UpdateWithoutWinnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    player1RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player2RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player1RatingAfter?: FloatFieldUpdateOperationsInput | number
-    player2RatingAfter?: FloatFieldUpdateOperationsInput | number
+    player1RatingBefore?: IntFieldUpdateOperationsInput | number
+    player2RatingBefore?: IntFieldUpdateOperationsInput | number
+    player1RatingAfter?: IntFieldUpdateOperationsInput | number
+    player2RatingAfter?: IntFieldUpdateOperationsInput | number
     player1RdBefore?: FloatFieldUpdateOperationsInput | number
     player2RdBefore?: FloatFieldUpdateOperationsInput | number
     player1RdAfter?: FloatFieldUpdateOperationsInput | number
     player2RdAfter?: FloatFieldUpdateOperationsInput | number
+    undoable?: BoolFieldUpdateOperationsInput | boolean
     player1?: UserV2UpdateOneRequiredWithoutMatches1NestedInput
     player2?: UserV2UpdateOneRequiredWithoutMatches2NestedInput
   }
@@ -8598,14 +8681,15 @@ export namespace Prisma {
     player1Id?: StringFieldUpdateOperationsInput | string
     player2Id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    player1RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player2RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player1RatingAfter?: FloatFieldUpdateOperationsInput | number
-    player2RatingAfter?: FloatFieldUpdateOperationsInput | number
+    player1RatingBefore?: IntFieldUpdateOperationsInput | number
+    player2RatingBefore?: IntFieldUpdateOperationsInput | number
+    player1RatingAfter?: IntFieldUpdateOperationsInput | number
+    player2RatingAfter?: IntFieldUpdateOperationsInput | number
     player1RdBefore?: FloatFieldUpdateOperationsInput | number
     player2RdBefore?: FloatFieldUpdateOperationsInput | number
     player1RdAfter?: FloatFieldUpdateOperationsInput | number
     player2RdAfter?: FloatFieldUpdateOperationsInput | number
+    undoable?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MatchV2UncheckedUpdateManyWithoutWinnerInput = {
@@ -8613,14 +8697,15 @@ export namespace Prisma {
     player1Id?: StringFieldUpdateOperationsInput | string
     player2Id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    player1RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player2RatingBefore?: FloatFieldUpdateOperationsInput | number
-    player1RatingAfter?: FloatFieldUpdateOperationsInput | number
-    player2RatingAfter?: FloatFieldUpdateOperationsInput | number
+    player1RatingBefore?: IntFieldUpdateOperationsInput | number
+    player2RatingBefore?: IntFieldUpdateOperationsInput | number
+    player1RatingAfter?: IntFieldUpdateOperationsInput | number
+    player2RatingAfter?: IntFieldUpdateOperationsInput | number
     player1RdBefore?: FloatFieldUpdateOperationsInput | number
     player2RdBefore?: FloatFieldUpdateOperationsInput | number
     player1RdAfter?: FloatFieldUpdateOperationsInput | number
     player2RdAfter?: FloatFieldUpdateOperationsInput | number
+    undoable?: BoolFieldUpdateOperationsInput | boolean
   }
 
 

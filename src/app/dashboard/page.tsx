@@ -25,8 +25,9 @@ export default function DashboardPage() {
       },
     })
       .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch user");
-        localStorage.clear()
+        if (!res.ok) {
+          throw new Error("Failed to fetch user");
+        }
         return res.json();
       })
       .then((data) => {
@@ -39,10 +40,9 @@ export default function DashboardPage() {
         }
       })
       .catch((err) => {
+        localStorage.removeItem("token");
         console.error("Error fetching user:", err);
         setError("Failed to load user data");
-        localStorage.removeItem("token");
-        router.push("/");
       });
   }, [router]);
 
@@ -96,6 +96,10 @@ export default function DashboardPage() {
     router.push("/leaderboard");
   }
 
+  function goToLedger() {
+    router.push("/ledger");
+  }
+
   return (
     <main style={{ padding: 40 }}>
       <h1>Dashboard</h1>
@@ -105,11 +109,12 @@ export default function DashboardPage() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div>
               <p>Name: {user.name}</p>
-              <p>Rating: {user.rating.toFixed(2)}</p>
-              <p>RD: {user.rd.toFixed(3)}</p>
-              <p>Volatility: {user.volatility.toFixed(3)}</p>
+              <p>Rating: {user.rating}</p>
             </div>
             <div>
+              <button onClick={goToLedger} style={{ marginLeft: "10px" }}>
+                Match History
+              </button>
               <button onClick={goToLeaderboard} style={{ marginLeft: "10px" }}>
                 Leaderboard
               </button>
@@ -125,6 +130,37 @@ export default function DashboardPage() {
             </button>
           </div>
           <h2>Match History</h2>
+          {matches.length > 0 && (
+            <button
+              onClick={async () => {
+                const latest = matches[0];
+                if (!latest.undoable) return;
+
+                const res = await fetch("/api/match/undo", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({ matchId: latest.id }),
+                });
+
+                if (res.ok) {
+                  const updated = await fetch("/api/user", {
+                    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+                  });
+                  const data = await updated.json();
+                  setUser(data.user);
+                  setMatches(data.matches);
+                } else {
+                  alert("Failed to undo match.");
+                }
+              }}
+              disabled={matches.length === 0 || !matches[0].undoable}
+              style={{cursor: matches[0]?.undoable ? "pointer" : "not-allowed",}}
+            >
+              Undo Last Match
+            </button>
+          )}
           <table style={{ width: "100%", borderCollapse: "collapse", marginTop: "1rem" }}>
             <thead>
               <tr>
@@ -133,15 +169,20 @@ export default function DashboardPage() {
               </tr>
             </thead>
             <tbody>
-              {(showAllMatches ? matches : matches.slice(0, 10)).map((match) => (
-                <tr key={match.id}>
-                  <td>
-                    {match.player1.name} ({match.player1eloChange >= 0 ? `+${match.player1eloChange.toFixed(2)}` : match.player1eloChange.toFixed(2)}) vs&nbsp;
-                    {match.player2.name} ({match.player2eloChange >= 0 ? `+${match.player2eloChange.toFixed(2)}` : match.player2eloChange.toFixed(2)})
-                  </td>
-                  <td>{match.winner.name}</td>
-                </tr>
-              ))}
+              {(showAllMatches ? matches : matches.slice(0, 10)).map((match) => {
+                const p1Change = match.player1RatingAfter - match.player1RatingBefore;
+                const p2Change = match.player2RatingAfter - match.player2RatingBefore;
+
+                return (
+                  <tr key={match.id}>
+                    <td>
+                      {match.player1.name} [{match.player1RatingBefore}] {p1Change >= 0 ? "+" : ""}{p1Change}        vs       &nbsp;
+                      {match.player2.name} [{match.player2RatingBefore}] {p2Change >= 0 ? "+" : ""}{p2Change}
+                    </td>
+                    <td>{match.winner.name}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
           {matches.length > 10 && (
