@@ -9,16 +9,24 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Name and password are required.' }, { status: 400 });
   }
 
-  const existingUser = await prisma.user.findUnique({ where: { name } });
+  const existingUser = await prisma.userV2.findFirst({
+    where: {
+      name: {
+        equals: name,
+        mode: 'insensitive',
+      },
+    },
+  });
+
   if (existingUser) {
     return NextResponse.json({ error: 'Username already taken.' }, { status: 409 });
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const user = await prisma.user.create({
+  const user = await prisma.userV2.create({
     data: {
-      name,
+      name, 
       password: hashedPassword,
     },
   });

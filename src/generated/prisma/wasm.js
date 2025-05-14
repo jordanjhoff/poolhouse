@@ -145,6 +145,7 @@ exports.Prisma.UserV2ScalarFieldEnum = {
   password: 'password',
   rating: 'rating',
   rd: 'rd',
+  volatility: 'volatility',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

@@ -9,13 +9,13 @@ export default function LeaderboardPage() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch('/api/leaderboard');
+      const res = await fetch('/api/user/leaderboard');
       const data = await res.json();
+      console.log("Fetched Users:", data);
       setUsersWithStats(data);
     }
     fetchData();
   }, []);
-
 
   return (
     <main style={{ padding: '40px' }}>
@@ -35,7 +35,7 @@ export default function LeaderboardPage() {
           <tr>
             <th style={{ borderBottom: '1px solid #ccc', textAlign: 'left', padding: '10px' }}>Ranking</th>
             <th style={{ borderBottom: '1px solid #ccc', textAlign: 'left', padding: '10px' }}>Name</th>
-            <th style={{ borderBottom: '1px solid #ccc', textAlign: 'left', padding: '10px' }}>ELO</th>
+            <th style={{ borderBottom: '1px solid #ccc', textAlign: 'left', padding: '10px' }}>Rating</th>
             <th style={{ borderBottom: '1px solid #ccc', textAlign: 'left', padding: '10px' }}>Wins</th>
             <th style={{ borderBottom: '1px solid #ccc', textAlign: 'left', padding: '10px' }}>Losses</th>
           </tr>
@@ -45,7 +45,7 @@ export default function LeaderboardPage() {
             <tr key={user.id}>
               <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>{index + 1}</td>
               <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>{user.name}</td>
-              <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>{user.elo}</td>
+              <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>{user.rating}</td>
               <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>{user.winCount}</td>
               <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>{user.lossCount}</td>
             </tr>

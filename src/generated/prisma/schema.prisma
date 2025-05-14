@@ -48,8 +48,9 @@ model UserV2 {
   password String
 
   // Glicko-1 rating fields
-  rating Float @default(1500.0) // Initial Glicko rating
-  rd     Float @default(350.0) // Rating deviation (max at start)
+  rating     Float @default(1500.0)
+  rd         Float @default(350.0)
+  volatility Float @default(0.06)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -3569,11 +3569,13 @@ export namespace Prisma {
   export type UserV2AvgAggregateOutputType = {
     rating: number | null
     rd: number | null
+    volatility: number | null
   }
 
   export type UserV2SumAggregateOutputType = {
     rating: number | null
     rd: number | null
+    volatility: number | null
   }
 
   export type UserV2MinAggregateOutputType = {
@@ -3582,6 +3584,7 @@ export namespace Prisma {
     password: string | null
     rating: number | null
     rd: number | null
+    volatility: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3592,6 +3595,7 @@ export namespace Prisma {
     password: string | null
     rating: number | null
     rd: number | null
+    volatility: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3602,6 +3606,7 @@ export namespace Prisma {
     password: number
     rating: number
     rd: number
+    volatility: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -3611,11 +3616,13 @@ export namespace Prisma {
   export type UserV2AvgAggregateInputType = {
     rating?: true
     rd?: true
+    volatility?: true
   }
 
   export type UserV2SumAggregateInputType = {
     rating?: true
     rd?: true
+    volatility?: true
   }
 
   export type UserV2MinAggregateInputType = {
@@ -3624,6 +3631,7 @@ export namespace Prisma {
     password?: true
     rating?: true
     rd?: true
+    volatility?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3634,6 +3642,7 @@ export namespace Prisma {
     password?: true
     rating?: true
     rd?: true
+    volatility?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3644,6 +3653,7 @@ export namespace Prisma {
     password?: true
     rating?: true
     rd?: true
+    volatility?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -3741,6 +3751,7 @@ export namespace Prisma {
     password: string
     rating: number
     rd: number
+    volatility: number
     createdAt: Date
     updatedAt: Date
     _count: UserV2CountAggregateOutputType | null
@@ -3770,6 +3781,7 @@ export namespace Prisma {
     password?: boolean
     rating?: boolean
     rd?: boolean
+    volatility?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     matches1?: boolean | UserV2$matches1Args<ExtArgs>
@@ -3784,6 +3796,7 @@ export namespace Prisma {
     password?: boolean
     rating?: boolean
     rd?: boolean
+    volatility?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["userV2"]>
@@ -3794,6 +3807,7 @@ export namespace Prisma {
     password?: boolean
     rating?: boolean
     rd?: boolean
+    volatility?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["userV2"]>
@@ -3804,11 +3818,12 @@ export namespace Prisma {
     password?: boolean
     rating?: boolean
     rd?: boolean
+    volatility?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserV2Omit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "password" | "rating" | "rd" | "createdAt" | "updatedAt", ExtArgs["result"]["userV2"]>
+  export type UserV2Omit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "password" | "rating" | "rd" | "volatility" | "createdAt" | "updatedAt", ExtArgs["result"]["userV2"]>
   export type UserV2Include<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     matches1?: boolean | UserV2$matches1Args<ExtArgs>
     matches2?: boolean | UserV2$matches2Args<ExtArgs>
@@ -3831,6 +3846,7 @@ export namespace Prisma {
       password: string
       rating: number
       rd: number
+      volatility: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["userV2"]>
@@ -4264,6 +4280,7 @@ export namespace Prisma {
     readonly password: FieldRef<"UserV2", 'String'>
     readonly rating: FieldRef<"UserV2", 'Float'>
     readonly rd: FieldRef<"UserV2", 'Float'>
+    readonly volatility: FieldRef<"UserV2", 'Float'>
     readonly createdAt: FieldRef<"UserV2", 'DateTime'>
     readonly updatedAt: FieldRef<"UserV2", 'DateTime'>
   }
@@ -6029,6 +6046,7 @@ export namespace Prisma {
     password: 'password',
     rating: 'rating',
     rd: 'rd',
+    volatility: 'volatility',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -6285,6 +6303,7 @@ export namespace Prisma {
     password?: StringFilter<"UserV2"> | string
     rating?: FloatFilter<"UserV2"> | number
     rd?: FloatFilter<"UserV2"> | number
+    volatility?: FloatFilter<"UserV2"> | number
     createdAt?: DateTimeFilter<"UserV2"> | Date | string
     updatedAt?: DateTimeFilter<"UserV2"> | Date | string
     matches1?: MatchV2ListRelationFilter
@@ -6298,6 +6317,7 @@ export namespace Prisma {
     password?: SortOrder
     rating?: SortOrder
     rd?: SortOrder
+    volatility?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     matches1?: MatchV2OrderByRelationAggregateInput
@@ -6314,6 +6334,7 @@ export namespace Prisma {
     password?: StringFilter<"UserV2"> | string
     rating?: FloatFilter<"UserV2"> | number
     rd?: FloatFilter<"UserV2"> | number
+    volatility?: FloatFilter<"UserV2"> | number
     createdAt?: DateTimeFilter<"UserV2"> | Date | string
     updatedAt?: DateTimeFilter<"UserV2"> | Date | string
     matches1?: MatchV2ListRelationFilter
@@ -6327,6 +6348,7 @@ export namespace Prisma {
     password?: SortOrder
     rating?: SortOrder
     rd?: SortOrder
+    volatility?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserV2CountOrderByAggregateInput
@@ -6345,6 +6367,7 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"UserV2"> | string
     rating?: FloatWithAggregatesFilter<"UserV2"> | number
     rd?: FloatWithAggregatesFilter<"UserV2"> | number
+    volatility?: FloatWithAggregatesFilter<"UserV2"> | number
     createdAt?: DateTimeWithAggregatesFilter<"UserV2"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"UserV2"> | Date | string
   }
@@ -6600,6 +6623,7 @@ export namespace Prisma {
     password: string
     rating?: number
     rd?: number
+    volatility?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     matches1?: MatchV2CreateNestedManyWithoutPlayer1Input
@@ -6613,6 +6637,7 @@ export namespace Prisma {
     password: string
     rating?: number
     rd?: number
+    volatility?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     matches1?: MatchV2UncheckedCreateNestedManyWithoutPlayer1Input
@@ -6626,6 +6651,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     rating?: FloatFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
+    volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     matches1?: MatchV2UpdateManyWithoutPlayer1NestedInput
@@ -6639,6 +6665,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     rating?: FloatFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
+    volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     matches1?: MatchV2UncheckedUpdateManyWithoutPlayer1NestedInput
@@ -6652,6 +6679,7 @@ export namespace Prisma {
     password: string
     rating?: number
     rd?: number
+    volatility?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6662,6 +6690,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     rating?: FloatFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
+    volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6672,6 +6701,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     rating?: FloatFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
+    volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6989,6 +7019,7 @@ export namespace Prisma {
     password?: SortOrder
     rating?: SortOrder
     rd?: SortOrder
+    volatility?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6996,6 +7027,7 @@ export namespace Prisma {
   export type UserV2AvgOrderByAggregateInput = {
     rating?: SortOrder
     rd?: SortOrder
+    volatility?: SortOrder
   }
 
   export type UserV2MaxOrderByAggregateInput = {
@@ -7004,6 +7036,7 @@ export namespace Prisma {
     password?: SortOrder
     rating?: SortOrder
     rd?: SortOrder
+    volatility?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7014,6 +7047,7 @@ export namespace Prisma {
     password?: SortOrder
     rating?: SortOrder
     rd?: SortOrder
+    volatility?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7021,6 +7055,7 @@ export namespace Prisma {
   export type UserV2SumOrderByAggregateInput = {
     rating?: SortOrder
     rd?: SortOrder
+    volatility?: SortOrder
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -8102,6 +8137,7 @@ export namespace Prisma {
     password: string
     rating?: number
     rd?: number
+    volatility?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     matches2?: MatchV2CreateNestedManyWithoutPlayer2Input
@@ -8114,6 +8150,7 @@ export namespace Prisma {
     password: string
     rating?: number
     rd?: number
+    volatility?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     matches2?: MatchV2UncheckedCreateNestedManyWithoutPlayer2Input
@@ -8131,6 +8168,7 @@ export namespace Prisma {
     password: string
     rating?: number
     rd?: number
+    volatility?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     matches1?: MatchV2CreateNestedManyWithoutPlayer1Input
@@ -8143,6 +8181,7 @@ export namespace Prisma {
     password: string
     rating?: number
     rd?: number
+    volatility?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     matches1?: MatchV2UncheckedCreateNestedManyWithoutPlayer1Input
@@ -8160,6 +8199,7 @@ export namespace Prisma {
     password: string
     rating?: number
     rd?: number
+    volatility?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     matches1?: MatchV2CreateNestedManyWithoutPlayer1Input
@@ -8172,6 +8212,7 @@ export namespace Prisma {
     password: string
     rating?: number
     rd?: number
+    volatility?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     matches1?: MatchV2UncheckedCreateNestedManyWithoutPlayer1Input
@@ -8200,6 +8241,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     rating?: FloatFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
+    volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     matches2?: MatchV2UpdateManyWithoutPlayer2NestedInput
@@ -8212,6 +8254,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     rating?: FloatFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
+    volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     matches2?: MatchV2UncheckedUpdateManyWithoutPlayer2NestedInput
@@ -8235,6 +8278,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     rating?: FloatFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
+    volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     matches1?: MatchV2UpdateManyWithoutPlayer1NestedInput
@@ -8247,6 +8291,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     rating?: FloatFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
+    volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     matches1?: MatchV2UncheckedUpdateManyWithoutPlayer1NestedInput
@@ -8270,6 +8315,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     rating?: FloatFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
+    volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     matches1?: MatchV2UpdateManyWithoutPlayer1NestedInput
@@ -8282,6 +8328,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     rating?: FloatFieldUpdateOperationsInput | number
     rd?: FloatFieldUpdateOperationsInput | number
+    volatility?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     matches1?: MatchV2UncheckedUpdateManyWithoutPlayer1NestedInput

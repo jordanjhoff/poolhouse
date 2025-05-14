@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "UserV2" ADD COLUMN     "volatility" DOUBLE PRECISION NOT NULL DEFAULT 0.06;

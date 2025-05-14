@@ -9,12 +9,17 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "Name parameter is required" }, { status: 400 });
   }
 
-  const opponent = await prisma.user.findUnique({
-    where: { name },
+  const opponent = await prisma.userV2.findFirst({
+    where: {
+      name: {
+        equals: name,
+        mode: "insensitive",
+      },
+    },
   });
 
   if (!opponent) {
-    return NextResponse.json({ error: "Opponent not found" }, { status: 404 });
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
   return NextResponse.json(opponent);
