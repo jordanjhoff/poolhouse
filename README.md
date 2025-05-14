@@ -1,1 +1,3 @@
-This is a Next.js afternoon project to handle a local ELO system at a pool house. It manages an ELO system and follows FIDE (chess) rankings for calculating user ELO with a variable K factor. Has leaderboards for statistic tracking.
+This is a Next.js afternoon project to handle a local ELO system at a pool house. It manages a rating system using Glicko for calculating user rating.
+
+Users can create matches between each other for rating tracking, and manage 
