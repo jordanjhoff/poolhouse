@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { MatchHistory } from "@/components/matchlist";
 import { transformToMatchLine, transformUserToPlayerCard } from "@/utils/transformers";
 import { PlayerCard } from "@/components/playercard";
 

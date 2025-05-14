@@ -21,8 +21,8 @@ export async function POST(req: Request) {
   }
 
   const session = await encrypt({ userId: user.id, name: user.name });
-
-  cookies().set('session', session, {
+  const cookieStore = await cookies();
+  cookieStore.set('session', session, {
     httpOnly: true,
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production',
