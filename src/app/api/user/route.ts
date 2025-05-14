@@ -12,11 +12,9 @@ export async function GET(req: Request) {
   }
 
   try {
-    const decoded = verify(token, process.env.JWT_SECRET as string) as { userId: string };
-    console.log("[GET /api/user] Decoded token:", decoded);
-
+    const userId = req.headers.get("userId") || "";
     const user = await prisma.userV2.findUnique({
-      where: { id: decoded.userId },
+      where: { id: userId },
       select: {
         id: true,
         name: true,
@@ -54,8 +52,33 @@ export async function GET(req: Request) {
       },
       orderBy: { createdAt: "desc" }
     });
+
+    const winCount = await prisma.matchV2.count({
+      where: {
+        winnerId: user.id,
+      }
+    });
+
+    const lossCount = await prisma.matchV2.count({
+      where: {
+        OR: [
+          {
+            player1Id: user.id,
+            winnerId: {
+              not: user.id, 
+            },
+          },
+          {
+            player2Id: user.id, 
+            winnerId: {
+              not: user.id, 
+            },
+          },
+        ],
+      },
+    });
     
-    return NextResponse.json({ user, matches });
+    return NextResponse.json({ user, matches, winCount, lossCount });
   } catch (error) {
     console.error("[GET /api/userV2] Error:", error);
     return NextResponse.json({ error: "Invalid token or server error" }, { status: 500 });
