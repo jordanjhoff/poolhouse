@@ -1,15 +1,8 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { verify } from "jsonwebtoken";
 
 export async function GET(req: Request) {
   console.log("[GET /api/user] Incoming request");
-
-  const token = req.headers.get("Authorization")?.split(" ")[1];
-  if (!token) {
-    console.warn("[GET /api/user] No token provided");
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
 
   try {
     const userId = req.headers.get("userId") || "";
