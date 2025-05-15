@@ -20,7 +20,6 @@ export default function DashboardPage() {
   const [transformedMatches, setTransformedMatches] = useState<any[]>([]);
   const [error, setError] = useState("");
   const router = useRouter();
-  const [showAllMatches, setShowAllMatches] = useState(false);
 
   function setUserData(data: any) {
     setUser(data.user);
@@ -31,17 +30,9 @@ export default function DashboardPage() {
   }
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      router.push("/");
-      return;
-    }
 
     fetch("/api/user", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      credentials: "include",
     })
       .then((res) => {
         if (!res.ok) {
@@ -77,10 +68,7 @@ export default function DashboardPage() {
       const winnerId = didWin ? user.id : opponent.id;
       const matchRes = await fetch("/api/match/create", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+        credentials: "include",
         body: JSON.stringify({
           player2Id: opponent.id,
           winnerId,
@@ -108,9 +96,7 @@ export default function DashboardPage() {
   
     const res = await fetch("/api/match/undo", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      credentials: "include",
       body: JSON.stringify({ matchId: latestMatch.id }),
     });
   
