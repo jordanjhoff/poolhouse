@@ -2,17 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
 export default function LoginPage() {
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      router.push('/dashboard');
-    }
-  }, []);
-
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -26,16 +17,18 @@ export default function LoginPage() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, password }),
+      credentials: 'include',
     });
-
-    if (!res.ok) {
+    
+    if (res.ok) {
+      console.log("Good login")
+      setTimeout(() => {
+        router.push('/dashboard');
+      }, 100);
+    } else {
       setError('Login failed');
-      return;
     }
-
-    const { token } = await res.json();
-    localStorage.setItem('token', token);
-    router.push('/dashboard');
+    
   }
 
   return (

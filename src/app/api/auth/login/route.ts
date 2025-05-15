@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
 import prisma from '@/lib/prisma';
-import { cookies } from 'next/headers';
 import { encrypt } from '@/lib/session';
 
 export async function POST(req: Request) {
@@ -21,13 +20,14 @@ export async function POST(req: Request) {
   }
 
   const session = await encrypt({ userId: user.id, name: user.name });
-  const cookieStore = await cookies();
-  cookieStore.set('session', session, {
+
+  const res = NextResponse.json({ message: 'Logged in' });
+  res.cookies.set('session', session, {
     httpOnly: true,
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production',
     path: '/',
   });
 
-  return NextResponse.json({ message: 'Logged in' });
+  return res;
 }
