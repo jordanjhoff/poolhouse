@@ -12,11 +12,16 @@ export function transformToMatchLine(match: MatchV2 & {
     const player1Str = `${match.player1.name} (${match.player1RatingBefore}) ${player1RatingChange >= 0 ? "+" : ""}${player1RatingChange}`;
     const player2Str = `${match.player2.name} (${match.player2RatingBefore}) ${player2RatingChange >= 0 ? "+" : ""}${player2RatingChange}`;
 
+    const d = new Date(match.createdAt);
+    const time = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+    const date = d.toLocaleDateString('en-US', { day: '2-digit', month: 'long', year: 'numeric' });
+    const formattedDate = `${time}, ${date}`;
+
     return {
         player1str: player1Str,
         player2str: player2Str,
         winnerstr: match.winner.name,
-        date: match.createdAt.toLocaleString(),
+        date: formattedDate,
     };
 }
 
