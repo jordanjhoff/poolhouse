@@ -67,7 +67,7 @@ export default function RatingHistoryChart({
   title = "Rating History",
   description = "",
 }: RatingHistoryChartProps) {
-  const [timeRange, setTimeRange] = useState<TimeRange>("30d");
+  const [timeRange, setTimeRange] = useState<TimeRange>("7d");
 
   const chartData = useMemo(() => {
     return generateChartData(matches, userId, timeRange);
