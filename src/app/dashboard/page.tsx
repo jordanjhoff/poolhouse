@@ -161,7 +161,7 @@ export default function DashboardPage() {
                   matches={matches} 
                   userId={user.id}
                   title="Rating History" 
-                  description="See how much you suck. Get good."
+                  description="You suck. Get good."
                 />
                 </div>
                 <div className="p-2">
