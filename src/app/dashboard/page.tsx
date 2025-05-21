@@ -3,14 +3,13 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { NavBar } from "@/components/navbar";
-import { PlayerCard } from "@/components/playercard"; // Your PlayerCard component
-import { MatchList } from "@/components/matchlist"; // Your MatchList component
+import { PlayerCard } from "@/components/playercard";
+import { MatchList } from "@/components/matchlist";
+import RatingHistoryChart from "@/components/matchchart"; 
 import { Button } from "@/components/ui/button";
 import { transformToMatchLine } from "@/utils/transformers";
 
 export const dynamic = "force-dynamic";
-
-
 
 export default function DashboardPage() {
   const [user, setUser] = useState<any>(null);
@@ -30,10 +29,7 @@ export default function DashboardPage() {
   }
 
   useEffect(() => {
-
-    fetch("/api/user", {
-      credentials: "include",
-    })
+    fetch("/api/user")
       .then((res) => {
         if (!res.ok) {
           router.push("/");
@@ -77,9 +73,7 @@ export default function DashboardPage() {
 
       if (!matchRes.ok) throw new Error("Failed to create match");
 
-      const updatedRes = await fetch("/api/user", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
+      const updatedRes = await fetch("/api/user");
 
       if (!updatedRes.ok) throw new Error("Failed to refresh user data");
 
@@ -133,14 +127,14 @@ export default function DashboardPage() {
           {error && <p>{error}</p>}
           {user && (
             <>
-              <div className="space-y-4">
+              <div className="space-y-4 p-2">
                 <PlayerCard
                   name={user.name}
                   rating={user.rating}
                   wins={winCount}
                   losses={lossCount}
                 />
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 p-2">
                   <Button className="p-2 shadow-lg" onClick={() => handleMatch(prompt("Who did you beat?") || "", true)}>
                     Add Win
                   </Button>
@@ -162,15 +156,22 @@ export default function DashboardPage() {
                     Undo Last Match
                   </Button>
                 </div>
-                <div className="p-2 shadow-lg">
+                <div className="p-2">
+                <RatingHistoryChart 
+                  matches={matches} 
+                  userId={user.id}
+                  title="Rating History" 
+                  description="See how much you suck. Get good."
+                />
+                </div>
+                <div className="p-2">
                   <MatchList matches={transformedMatches} />
                 </div>
-                <Button onClick={logout}>Log out</Button>
+                <Button className="p-2" onClick={logout}>Log out</Button>
               </div>
             </>
           )}
         </div>
-        
       </main>
     </>
   );

@@ -2,7 +2,7 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuList, NavigationMenuL
 
 export function NavBar() {
   return (
-    <NavigationMenu className="p-2 shadow-lg">
+    <NavigationMenu className="p-2">
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
