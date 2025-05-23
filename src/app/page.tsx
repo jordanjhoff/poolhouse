@@ -1,62 +1,94 @@
 "use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { NavBar } from "@/components/navbar"
+import { Label } from "@/components/ui/label"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 export default function LoginPage() {
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const router = useRouter();
+  const [name, setName] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
+  const router = useRouter()
 
   async function handleLogin(e: React.FormEvent) {
-    e.preventDefault();
-    setError('');
+    e.preventDefault()
+    setError("")
 
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, password }),
-      credentials: 'include',
-    });
-    
+      credentials: "include",
+    })
+
     if (res.ok) {
-      console.log("Good login")
       setTimeout(() => {
-        router.push('/dashboard');
-      }, 100);
+        router.push("/dashboard")
+      }, 100)
     } else {
-      setError('Login failed');
+      setError("Login failed")
     }
-    
   }
 
   return (
-    <main style={{ padding: 40, maxWidth: 400, margin: '0 auto' }}>
-      <h1>Login</h1>
-      <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Name"
-          required
-        />
-        <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          placeholder="Password"
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
+    <>
+      <NavBar />
+      <main className="flex justify-center items-center min-h-screen p-4">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="text-center text-2xl">Login</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleLogin} className="flex flex-col gap-4">
+              <div>
+                <Label htmlFor="name" className="p-2" >Name</Label>
+                <Input
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Enter your name"
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="password" className="p-2">Password</Label>
+                <Input
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                  placeholder="Enter your password"
+                  required
+                />
+              </div>
+              <Button type="submit" className="w-full">
+                Login
+              </Button>
+            </form>
 
-      {error && <p style={{ color: 'red', marginTop: 10 }}>{error}</p>}
+            {error && (
+              <Alert variant="destructive" className="mt-4">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
 
-      <div style={{ marginTop: 20, display: 'flex', justifyContent: 'space-between' }}>
-        <button onClick={() => router.push('/register')}>Register</button>
-        <button onClick={() => router.push('/leaderboard')}>Leaderboard</button>
-      </div>
-    </main>
-  );
+            <div className="mt-6 flex justify-center">
+              <Button
+                variant="outline"
+                type="button"
+                onClick={() => router.push("/register")}
+              >
+                Register
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </main>
+    </>
+  )
 }

@@ -85,7 +85,7 @@ export default function RatingHistoryChart({
     <Card className="p-2 shadow-lg">
       <CardHeader className="flex flex-row items-center justify-between p-2">
         <div>
-          <CardTitle>{title}</CardTitle>
+          <CardTitle>{title} </CardTitle>
           <CardDescription>{description}</CardDescription>
         </div>
         <TimeRangeSelector 

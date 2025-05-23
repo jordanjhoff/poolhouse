@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { NavBar } from "@/components/navbar";
 import { MatchList } from "@/components/matchlist";
 import { transformToMatchLine } from "@/utils/transformers";
@@ -20,7 +19,6 @@ type Match = {
 };
 
 export default function MatchLedger() {
-  const router = useRouter();
   const [transformedMatches, setMatches] = useState<[]>([]);
   const [page, setPage] = useState(1);
   const [pageSize] = useState(1000);
@@ -30,6 +28,7 @@ export default function MatchLedger() {
     fetch(`/api/match/ledger?page=${page}&pageSize=${pageSize}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log("Fetched Matches:", data);
         setMatches(data.matches.map(transformToMatchLine));
         setTotalPages(data.totalPages);
       });

@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { decrypt } from '@/lib/session'
 import { cookies } from 'next/headers'
  
-const protectedRoutes = ['/dashboard', '/leaderboard', '/ledger']
+const protectedRoutes = ['/dashboard']
 const publicRoutes = ['/register', '/']
+const publicAPIRoutes = ['/api/auth', '/api/match/ledger', '/api/leaderboard']
  
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname
@@ -15,7 +16,7 @@ export default async function middleware(req: NextRequest) {
   const session = await decrypt(cookie)
   console.log('sess:', session)
 
-  if (path.startsWith('/api') && !path.startsWith('/api/auth')) {
+  if (path.startsWith('/api') && !publicAPIRoutes.some(api => path.startsWith(api))) {
     if (!session?.userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
